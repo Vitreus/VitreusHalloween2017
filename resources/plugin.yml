@@ -1,0 +1,11 @@
+main: com.vitreusmc.vitreusHalloween2017.VitreusHalloween2017
+
+name: VitreusHalloween2017
+description: Vitreus' halloween event for 2017.
+version: 0.1
+
+commands:
+  blessing:
+    usage: /blessing <Player>
+    description: Outputs a player's blessing level. 
+    permission: admin
