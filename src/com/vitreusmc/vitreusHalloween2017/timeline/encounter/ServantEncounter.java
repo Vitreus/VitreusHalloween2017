@@ -1,14 +1,31 @@
 package com.vitreusmc.vitreusHalloween2017.timeline.encounter;
 
+import java.util.Map;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.command.CommandSender.Spigot;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Vex;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.minecraft.server.v1_12_R1.NBTTagInt;
 
 public class ServantEncounter extends Encounter {
 
@@ -37,9 +54,19 @@ public class ServantEncounter extends Encounter {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				world.spawnEntity(location, EntityType.VEX);
+				Vex vex = (Vex) world.spawnEntity(location, EntityType.VEX);
+				vex.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 90, 1));
+
 				player.playSound(location, Sound.BLOCK_END_PORTAL_SPAWN, SoundCategory.MASTER, 100, 1);
+				
 				particleTask.cancel();
+				
+				new BukkitRunnable() {
+					@Override
+					public void run() {
+						vex.remove();
+					}
+				}.runTaskLater(plugin, 90);
 			}
 		}.runTaskLater(plugin, 120);
 	}
