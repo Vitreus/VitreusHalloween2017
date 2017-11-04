@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class HungerEncounter extends Encounter {
 
 	public HungerEncounter(Player player) {
-		super(player, 0.25);
+		super(player, 25);
 	}
 
 	@Override

@@ -96,7 +96,7 @@ public class VitreusCard implements ConfigurationSerializable {
 		HashMap<String, Object> section = new HashMap<String, Object>();
 		section.put("id", ID);
 		section.put("label", label);
-		section.put("image", imageFile.getAbsolutePath());
+		section.put("image", imageFile.getName());
 		
 		return section;
 	}

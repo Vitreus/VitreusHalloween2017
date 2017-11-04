@@ -13,7 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 public class SymbolsEncounter extends Encounter {
 
 	public SymbolsEncounter(Player player) {
-		super(player, 0.25);
+		super(player, 25);
 	}
 
 	@Override

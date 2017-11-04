@@ -14,9 +14,9 @@ public abstract class Encounter extends BukkitRunnable {
 	private JavaPlugin plugin = JavaPlugin.getPlugin(VitreusHalloween2017.class);
 
 	private Player player;
-	private double blessing;
+	private int blessing;
 	
-	public Encounter(Player player, double blessing) {
+	public Encounter(Player player, int blessing) {
 		this.player = player;
 		this.blessing = blessing;
 	}
@@ -29,7 +29,7 @@ public abstract class Encounter extends BukkitRunnable {
 		return blessing;
 	}
 	
-	public void setBlessing(double blessing) {
+	public void setBlessing(int blessing) {
 		this.blessing = blessing;
 	}
 	
@@ -38,7 +38,7 @@ public abstract class Encounter extends BukkitRunnable {
 	}
 	
 	public void start() {
-		this.runTaskAsynchronously(plugin);
+		this.runTask(plugin);
 		addBlessing();
 	}
 	

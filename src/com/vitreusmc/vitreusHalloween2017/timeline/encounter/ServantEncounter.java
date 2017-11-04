@@ -25,12 +25,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.minecraft.server.v1_12_R1.NBTTagInt;
-
 public class ServantEncounter extends Encounter {
 
 	public ServantEncounter(Player player) {
-		super(player, 0.25);
+		super(player, 25);
 	}
 
 	@Override

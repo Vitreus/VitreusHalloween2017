@@ -16,14 +16,22 @@ public class BlessingCommand implements CommandExecutor {
 		Player player;
 		double blessing;
 		
-		if (args.length != 1) {
+		if (args.length < 1) {
 			return false;
 		}
 		
+		
 		playerName = args[0];
 		player = Bukkit.getPlayer(playerName);
-		blessing = BlessingController.getBlessing(player);
 		
+		if (args.length == 3) {
+			if (args[1].equals("set")) {
+				BlessingController.setBlessing(player, Integer.parseInt(args[2]));
+			}
+		}
+
+		blessing = BlessingController.getBlessing(player);
+
 		sender.sendMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Blessing: " + ChatColor.RESET + "" + ChatColor.DARK_PURPLE + blessing);
 		
 		return true;

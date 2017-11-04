@@ -9,6 +9,7 @@ import com.vitreusmc.vitreusHalloween2017.blessing.BlessingCommand;
 import com.vitreusmc.vitreusHalloween2017.blessing.BlessingController;
 import com.vitreusmc.vitreusHalloween2017.card.CardManager;
 import com.vitreusmc.vitreusHalloween2017.card.VitreusCard;
+import com.vitreusmc.vitreusHalloween2017.timeline.trigger.CauldronTrigger;
 import com.vitreusmc.vitreusHalloween2017.timeline.trigger.FleshTrigger;
 import com.vitreusmc.vitreusHalloween2017.timeline.trigger.SleepTrigger;
 
@@ -33,6 +34,7 @@ public class VitreusHalloween2017 extends JavaPlugin {
 		server.getPluginManager().registerEvents(new BlessingController(), this);
 		server.getPluginManager().registerEvents(new SleepTrigger(), this);
 		server.getPluginManager().registerEvents(new FleshTrigger(), this);
+		server.getPluginManager().registerEvents(new CauldronTrigger(), this);
 	}
 	
 }

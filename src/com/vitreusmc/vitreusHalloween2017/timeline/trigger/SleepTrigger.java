@@ -11,9 +11,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.vitreusmc.vitreusHalloween2017.VitreusHalloween2017;
 import com.vitreusmc.vitreusHalloween2017.blessing.BlessingController;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.BatsEncounter;
+import com.vitreusmc.vitreusHalloween2017.timeline.encounter.BeatEncounter;
+import com.vitreusmc.vitreusHalloween2017.timeline.encounter.CallingEncounter;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.EncouragementEncounter;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.GluttonyEncounter;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.HungerEncounter;
+import com.vitreusmc.vitreusHalloween2017.timeline.encounter.NeighEncounter;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.ServantEncounter;
 import com.vitreusmc.vitreusHalloween2017.timeline.encounter.SymbolsEncounter;
 
@@ -25,12 +28,16 @@ public class SleepTrigger implements Listener {
 	public void onPlayerSleep(PlayerBedEnterEvent event) {
 		Player player = event.getPlayer();
 		
-		if (BlessingController.getBlessing(player) <= 2.5) {
+		if (BlessingController.getBlessing(player) >= 0 && BlessingController.getBlessing(player) <= 259) {
 			sendLevelOneEncounter(player);
 		}
 		
-		if (BlessingController.getBlessing(player) >= 2.6) {
+		if (BlessingController.getBlessing(player) >= 260 && BlessingController.getBlessing(player) <= 449) {
 			sendLevelTwoEncounter(player);					
+		}
+		
+		if (BlessingController.getBlessing(player) >= 450) {
+			sendLevelThreeEncounter(player);					
 		}
 	}
 	
@@ -75,6 +82,29 @@ public class SleepTrigger implements Listener {
 			}
 			case 2: {
 				new ServantEncounter(player).start();
+				break;
+			}
+		}
+	}
+	
+	private void sendLevelThreeEncounter(Player player) {
+		Random random = new Random();
+		
+		if (random.nextBoolean()) {
+			return;
+		}
+		
+		switch (random.nextInt(3)) {
+			case 0: {
+				new BeatEncounter(player).start();
+				break;
+			}
+			case 1: {
+				new CallingEncounter(player).start();
+				break;
+			}
+			case 2: {
+				new NeighEncounter(player).start();
 				break;
 			}
 		}

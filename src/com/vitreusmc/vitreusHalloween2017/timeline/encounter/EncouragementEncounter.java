@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class EncouragementEncounter extends Encounter {
 
 	public EncouragementEncounter(Player player) {
-		super(player, 0.25);
+		super(player, 25);
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -19,9 +20,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.vitreusmc.vitreusHalloween2017.card.CardManager;
 import com.vitreusmc.vitreusHalloween2017.card.VitreusCard;
 
-public class GluttonyEncounter extends Encounter {
+import net.md_5.bungee.api.ChatColor;
 
-	public GluttonyEncounter(Player player) {
+public class CallingEncounter extends Encounter {
+
+	public CallingEncounter(Player player) {
 		super(player, 25);
 	}
 
@@ -31,33 +34,33 @@ public class GluttonyEncounter extends Encounter {
 		JavaPlugin plugin = getPlugin();
 		World world = player.getWorld();
 		Location location = player.getBedSpawnLocation();
-		VitreusCard gluttonyCard = CardManager.getCard("gluttonyCard");
+		VitreusCard bubbleBoilCard = CardManager.getCard("bubbleBoilCard");
 		List<String> lore = new ArrayList<String>();
-			lore.add("Halloween 2017");
-		ItemStack gluttonyCardMap = new ItemStack(Material.MAP, 1, gluttonyCard.getID());		
-			gluttonyCardMap.getItemMeta().setDisplayName("Gluttony Card");
-			gluttonyCardMap.getItemMeta().setLore(lore);
+			lore.add(ChatColor.GOLD + "Halloween 2017");
+		ItemStack bubbleBoilMap = new ItemStack(Material.MAP, 1, bubbleBoilCard.getID());
+		MapMeta bubbleBoilCardMeta = (MapMeta) bubbleBoilMap.getItemMeta();
+			bubbleBoilCardMeta.setDisplayName(ChatColor.DARK_PURPLE + "Bubble and Boil Card");
+			bubbleBoilCardMeta.setLore(lore);
+		bubbleBoilMap.setItemMeta(bubbleBoilCardMeta);
 		
 		new BukkitRunnable() {
 			@Override
 			public void run() {				
-				player.sendMessage(createWhisper("Though dead,\nIt is said,\nThat the flesh of the Lord,\nIs ripe with reward.\n\nEat my child..."));
+				player.sendMessage(createWhisper("Boil, Bubble,\nBubble up some trouble..."));
 				
 				new BukkitRunnable() {
 					@Override
 					public void run() {
-						player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 1));
-						player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 200, 1));
 						player.playSound(player.getBedSpawnLocation(), Sound.ENTITY_ZOMBIE_AMBIENT, 100, (float) 0.2);
 					}
 				}.runTask(plugin);
 				
-				if (player.hasMetadata("halloween2017.gluttonyMap")) {
+				if (player.hasMetadata("halloween2017.bubbleBoilMap")) {
 					return;
 				}
 				
-				world.dropItem(location, gluttonyCardMap);
-				player.setMetadata("halloween2017.gluttonyMap", new FixedMetadataValue(plugin, true));
+				world.dropItem(location, bubbleBoilMap);
+				player.setMetadata("halloween2017.bubbleBoilMap", new FixedMetadataValue(plugin, true));
 			}
 		}.runTask(plugin);
 	}
