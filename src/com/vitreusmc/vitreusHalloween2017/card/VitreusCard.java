@@ -54,9 +54,17 @@ public class VitreusCard implements ConfigurationSerializable {
 			view.addRenderer(renderer);	
 			
 			return;
-		}
-	
-		this.view = Bukkit.getServer().getMap(ID);				
+		} else {
+			this.view = Bukkit.getServer().getMap(ID);
+			this.ID = view.getId();
+			
+			for (MapRenderer render : view.getRenderers()) {
+				view.removeRenderer(render);
+			}
+			
+			view.setScale(Scale.CLOSEST);
+			view.addRenderer(renderer);
+		}	
 	}
 	
 	public MapView getView() {

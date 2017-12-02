@@ -68,7 +68,7 @@ public class CauldronTrigger implements Listener {
 					}
 				}
 				
-				if (!(BlessingController.getBlessing(thrower) <= 450)) {
+				if (BlessingController.getBlessing(thrower) <= 450) {
 					return;
 				}
 
@@ -80,6 +80,8 @@ public class CauldronTrigger implements Listener {
 					}
 				};
 				cauldronParticlesTask.runTaskTimerAsynchronously(plugin, 0, 5);
+				
+				final Player player = thrower;
 				
 				BukkitRunnable summonTask = new BukkitRunnable() {
 					@Override
@@ -104,6 +106,7 @@ public class CauldronTrigger implements Listener {
 								
 								if (horsemen.getRider().isDead() || horsemen.getRider() == null) {
 									this.cancel();
+									BlessingController.setBlessing(player, -1);
 								}
 							}
 						};
